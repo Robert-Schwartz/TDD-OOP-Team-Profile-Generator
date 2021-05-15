@@ -8,7 +8,7 @@ test('test for office number for manager object', () => {
 });
 
 //--------------Test for Manager get Role
-test('test for manager role to be overridden to "manager"', () => {
+test('test for manager role to be overridden to "Manager"', () => {
     const manager = new Manager('Bob', 7411, 'bschwartz23@gmail.com', 1802,);
     expect(manager.getRole()).toBe('Manager');
 });
