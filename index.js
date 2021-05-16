@@ -31,7 +31,7 @@ const managerPrompts = [
     },
     {
         type: "input",
-        message: "Please enter the office number: ",
+        message: "Please enter the office location number: ",
         name: "officeNumber",
     },
 ];
@@ -113,25 +113,6 @@ function askQuestions() {
         });
 }
 
-//--------------Prompt for adding additional team members
-function addToTeam() {
-    // ask to add team member or End team
-    prompt(addTeamMember)
-        .then((data) => {
-            if (data.addMember === 'Add Engineer?') {
-                addEngineer();
-            } else if (data.addMember === 'Add Intern?') {
-                addIntern();
-            } else {
-                //send to generate new page
-                console.log(myTeamArray);
-                console.log('New page Ready!')
-                //return generateHTML()
-                return initNewHTML();
-            }
-        });
-}
-
 function addEngineer() {
     // ask Engineer questions
     prompt(engineerPrompts)
@@ -164,14 +145,24 @@ function addIntern() {
         });
 }
 
-
-/*!!!!!!!!!!I need HELP!
-to write my HTML file
-1.  should I put myTeamArray as the second parameter instead of data?
-2.  what do I return?
-3.  how do I call that function? 
-4.  is my module exports correct?
-*/
+//--------------Prompt for adding additional team members
+function addToTeam() {
+    // ask to add team member or End team
+    prompt(addTeamMember)
+        .then((data) => {
+            if (data.addMember === 'Add Engineer?') {
+                addEngineer();
+            } else if (data.addMember === 'Add Intern?') {
+                addIntern();
+            } else {
+                //send to generate new page
+                console.log(myTeamArray);
+                console.log('New page Ready!')
+                //return generateHTML()
+                return initNewHTML();
+            }
+        });
+}
 
 //--------------- Function to write HTML file
 function writeToFile(fileName, myTeamArray) {
@@ -186,9 +177,32 @@ function writeToFile(fileName, myTeamArray) {
 //--------------- Function to initialize app
 // function is called at the end of the additional team members function
 function initNewHTML() {
-    inquirer.prompt(questions).then((data) => {
-        writeToFile("index.HTML", generateHTML(data));
-    });
+    let allPeople = '';
+    myTeamArray.forEach(person => {
+        let uniqueAttribute = '';
+        if
+            ('officeNumber' in person) {
+            uniqueAttribute = `Office Location: ${person.officeNumber}`
+        } else if
+            ('school' in person) {
+            uniqueAttribute = `School: ${person.school}`
+        } else if
+            ('gitHub' in person) {
+            uniqueAttribute = `Github username: ${person.github}`
+        }
+
+        allPeople = allPeople +
+            `<div class="card" style="width: 18rem">
+            <div class="card-header">${person.name}</div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"> Employee ID:  ${person.id}</li>
+              <li class="list-group-item"> email:  ${person.email}</li>
+              <li class="list-group-item">${uniqueAttribute}</li>
+            </ul>
+          </div>`
+
+    })
+    console.log(allPeople);
 }
 
 //--------------- Call function to begin prompts
