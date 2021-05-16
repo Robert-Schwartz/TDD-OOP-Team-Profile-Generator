@@ -1,6 +1,7 @@
 //---------------required packages
 const { prompt } = require("inquirer");
-// const fs = require("fs");
+const fs = require("fs");
+const generateHTML = require("./src/generateHTML");
 
 //---------------Employee Packages
 const Manager = require("./lib/manager");
@@ -125,8 +126,9 @@ function addToTeam() {
             } else {
                 //send to generate new page
                 console.log(myTeamArray);
-                return console.log('New page Ready!')
+                console.log('New page Ready!')
                 //return generateHTML()
+                return initNewHTML();
             }
         });
 }
@@ -165,6 +167,33 @@ function addIntern() {
 
 //--------------- Call function to begin prompts
 askQuestions()
+
+/*!!!!!!!!!!I need HELP!
+to write my HTML file
+1.  should I put myTeamArray as the second parameter instead of data?
+2.  what do I return?
+3.  how do I call that function? 
+4.  is my module exports correct?
+*/
+
+//--------------- Function to write HTML file
+function writeToFile(fileName, myTeamArray) {
+    fs.writeFile(fileName, myTeamArray, (err) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+    });
+}
+
+//--------------- Function to initialize app
+// function is called at the end of the additional team members function
+function initNewHTML() {
+    inquirer.prompt(questions).then((data) => {
+        writeToFile("index.HTML", generateHTML(data));
+    });
+}
+
 
 //--------------- Export new myTeamArray
 module.exports = [myTeamArray];
