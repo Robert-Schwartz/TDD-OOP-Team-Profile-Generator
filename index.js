@@ -36,6 +36,16 @@ const managerPrompts = [
     },
 ];
 
+// Add another team member or finish
+const addTeamMember = [
+    {
+        type: "list",
+        message: "Would you like to add another member to the team?",
+        name: "addMember",
+        choices: ["Add Engineer?", "Add Intern?", "No Additional Members"]
+    },
+];
+
 // Engineer Questions
 const engineerPrompts = [
     {
@@ -82,17 +92,6 @@ const internPrompts = [
         message:
             "Please enter the name of the school the Intern is attending: ",
         name: "school",
-    },
-];
-
-//-------------- Prompts to add additional team member
-// Add another team member
-const addTeamMember = [
-    {
-        type: "list",
-        message: "Would you like to add another member to the team?",
-        name: "addMember",
-        choices: ["Add Engineer?", "Add Intern?", "No Additional Members"]
     },
 ];
 
@@ -165,8 +164,6 @@ function addIntern() {
         });
 }
 
-//--------------- Call function to begin prompts
-askQuestions()
 
 /*!!!!!!!!!!I need HELP!
 to write my HTML file
@@ -194,6 +191,8 @@ function initNewHTML() {
     });
 }
 
+//--------------- Call function to begin prompts
+askQuestions()
 
 //--------------- Export new myTeamArray
 module.exports = [myTeamArray];
