@@ -7,7 +7,7 @@ const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 
-//---------------- New Team Array
+//---------------- New Team Array Resulting from Prompts
 const myTeamArray = [];
 
 //--------------- Begin Inquirer prompts
@@ -92,8 +92,8 @@ const addTeamMember = [
         message: "Would you like to add another member to the team?",
         name: "addMember",
         choices: ["Add Engineer?", "Add Intern?", "No Additional Members"]
-    }
-]
+    },
+];
 
 //--------------- Functions to run Prompts
 
@@ -109,7 +109,7 @@ function askQuestions() {
             );
 
             myTeamArray.push(manager);
-            addToTeam();
+            return addToTeam();
         });
 }
 
@@ -117,18 +117,18 @@ function askQuestions() {
 function addToTeam() {
     // ask to add team member or End team
     prompt(addTeamMember)
-        .then((data)) => {
-        if (addTeamMember === 'Add Engineer?') {
-            addEngineer();
-        } else if (addTeamMember === 'Add Intern?') {
-            addIntern();
-        } else {
-            //send to generate new page
-            console.log('New page Ready')
-            //return generateHTML()
-        }
-    }
-
+        .then((data) => {
+            if (data.addMember === 'Add Engineer?') {
+                addEngineer();
+            } else if (data.addMember === 'Add Intern?') {
+                addIntern();
+            } else {
+                //send to generate new page
+                console.log(myTeamArray);
+                return console.log('New page Ready!')
+                //return generateHTML()
+            }
+        });
 }
 
 function addEngineer() {
@@ -143,7 +143,7 @@ function addEngineer() {
             );
 
             myTeamArray.push(engineer);
-            addToTeam();
+            return addToTeam();
         });
 }
 
@@ -159,10 +159,12 @@ function addIntern() {
             );
 
             myTeamArray.push(intern);
-            addToTeam();
+            return addToTeam();
         });
 }
 
 //--------------- Call function to begin prompts
-askQuestions();
+askQuestions()
 
+//--------------- Export new myTeamArray
+module.exports = [myTeamArray];
