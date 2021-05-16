@@ -14,6 +14,31 @@ function generateHTML(data) {
 </head>
 <body>
 
+<header>
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">My Team</a>
+    </div>
+  </nav>
+</div>
+</header>
+
+<!------------Employee Cards----------->
+<div id="cards" class="container">
+  <div class="row">
+    <div class="col">
+      Column
+    </div>
+    <div class="col">
+      Column
+    </div>
+    <div class="col">
+      Column
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
 `;
