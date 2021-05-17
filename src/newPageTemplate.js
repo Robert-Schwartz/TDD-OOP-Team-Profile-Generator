@@ -11,25 +11,21 @@ function pageTemplate(peopleHTML) {
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
       integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-      crossorigin="anonymous"
-    />
+      crossorigin="anonymous"/>
     <link rel="stylesheet" href="style.css" />
     <title>My Team Profile</title>
   </head>
   <body>
+  <!------------Header----------->
     <header>
-      <!------------Header----------->
-      <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#"> My Team </a>
-          </div>
+        <nav  class="header navbar navbar-expand-lg">
+          <a class="header navbar-brand" href="#"> My Team </a>
         </nav>
-      </div>
     </header>
     <!------------Employee Cards Container----------->
+    <div id=employeeCards class="row">
     ${peopleHTML}
-
+    </div>
       </div>
     </div>
   </body>

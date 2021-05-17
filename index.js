@@ -184,23 +184,24 @@ function initNewHTML() {
         } else if
             ('github' in person) {
             title = 'Engineer',
-                uniqueAttribute = `Github username: ${person.github}`
+                uniqueAttribute = `Github: ${person.github}`
         }
 
         allPeople = allPeople + `
         <div class="col">
             <div class="card" style="width: 18rem">
                 <div class="card-header">
-                <h2>${person.name}</h2>
-                <h3>${title}</h3>
+                <h3>${person.name}</h3>
+                <h4>${title}</h4>
                 </div>
                 <ul class="list-group list-group-flush">
-                <li class="list-group-item"> Employee ID: ${person.id}</li>
-                <li class="list-group-item"> Email: ${person.email}</li>
-                <li class="list-group-item">${uniqueAttribute}</li>
+                <li class="list-group-item employeeProperties"> Employee ID: <span>${person.id}</span></li>
+                <li class="list-group-item employeeProperties"> Email: <span>${person.email}</span></li>
+                <li class="list-group-item employeeProperties"> <span>${uniqueAttribute}</span></li>
                 </ul>
             </div>
-        </div>`
+        </div>
+        `
     })
     console.log('allPeople =' + allPeople);
     return allPeople

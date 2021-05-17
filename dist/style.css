@@ -1,4 +1,42 @@
-* {
-    color: #7510f7;
+
+.header {
+    background-color: #7510F7; 
+    width: 100%;
+    font-size: xx-large;
+    color: white;
+    text-align: center;
 }
 
+#employeeCards {
+   margin: 100px;
+   padding: 20px;
+   background-color: whitesmoke;
+}
+
+.card-header {
+    background-color:rgba(151, 184, 184, 40%);
+}
+
+.card-header h3 {
+    font-weight: bold;
+    color: #7510F7;
+    text-shadow: .25px .25px black;
+    text-align: center;
+}
+
+.card-header h4 {
+    color:black;
+    text-shadow: .5px .5px black;
+    text-align: center;
+}
+
+
+.employeeProperties {
+    font-weight: bold;
+    color: blue;
+}
+
+.employeeProperties span {
+    color: black;
+    font-weight: normal;
+}
