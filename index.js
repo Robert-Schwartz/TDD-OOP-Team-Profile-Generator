@@ -107,9 +107,8 @@ function askQuestions() {
                 data.email,
                 data.officeNumber
             );
-
             myTeamArray.push(manager);
-            return addToTeam();
+            addToTeam();
         });
 }
 
@@ -155,34 +154,25 @@ function addToTeam() {
             } else if (data.addMember === 'Add Intern?') {
                 addIntern();
             } else {
-                //send to generate new page
-                console.log(myTeamArray);
-                console.log('New page Ready!')
-                //return generateHTML()
-                return initNewHTML();
+                console.log('myTeamArray =' + myTeamArray);
+                //call peopleHTML to create employee cards string
+                const peopleHTML = initNewHTML();
+                //call generateHTML to create Complete HTML page
+                const allHTML = generateHTML(peopleHTML);
+                //call write to file to generate HTML with allHTML
+                writeToFile('index.html',allHTML);
             }
         });
 }
 
-//--------------- Function to write HTML file
-function writeToFile(fileName, myTeamArray) {
-    fs.writeFile(fileName, myTeamArray, (err) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-    });
-}
-
-//--------------- Function to initialize app
-// function is called at the end of the additional team members function
+//--------------- Function to initialize HTML Cards
 function initNewHTML() {
     let allPeople = '';
     myTeamArray.forEach(person => {
         let uniqueAttribute = '';
         if
             ('officeNumber' in person) {
-            uniqueAttribute = `Office Location: ${person.officeNumber}`
+            uniqueAttribute = `Office Location:${person.officeNumber}`
         } else if
             ('school' in person) {
             uniqueAttribute = `School: ${person.school}`
@@ -191,19 +181,35 @@ function initNewHTML() {
             uniqueAttribute = `Github username: ${person.github}`
         }
 
-        allPeople = allPeople +
-            `<div class="card" style="width: 18rem">
-            <div class="card-header">${person.name}</div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"> Employee ID:  ${person.id}</li>
-              <li class="list-group-item"> email:  ${person.email}</li>
-              <li class="list-group-item">${uniqueAttribute}</li>
-            </ul>
-          </div>`
-
+        allPeople = allPeople + `
+        <div class="col">
+            <div class="card" style="width: 18rem">
+                <div class="card-header">${person.name}</div>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item"> Employee ID: ${person.id}</li>
+                <li class="list-group-item"> email: ${person.email}</li>
+                <li class="list-group-item">${uniqueAttribute}</li>
+                </ul>
+            </div>
+        </div>`
     })
-    console.log(allPeople);
+    console.log('allPeople =' + allPeople);
+    return allPeople
 }
+
+
+
+
+//--------------- Function to write HTML file
+function writeToFile(fileName, allHTML) {
+    fs.writeFile(fileName, allHTML, (err) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+    });
+}
+
 
 //--------------- Call function to begin prompts
 askQuestions()
