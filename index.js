@@ -1,12 +1,14 @@
 //---------------required packages
 const { prompt } = require("inquirer");
 const fs = require("fs");
-const generateHTML = require("./src/generateHTML");
+const pageTemplate = require("./src/newPageTemplate");
 
 //---------------Employee Packages
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
+const { totalmem } = require("os");
+const { title } = require("process");
 
 //---------------- New Team Array Resulting from Prompts
 const myTeamArray = [];
@@ -157,10 +159,10 @@ function addToTeam() {
                 console.log('myTeamArray =' + myTeamArray);
                 //call peopleHTML to create employee cards string
                 const peopleHTML = initNewHTML();
-                //call generateHTML to create Complete HTML page
-                const allHTML = generateHTML(peopleHTML);
+                //call pageTemplate to create Complete HTML page
+                const allHTML = pageTemplate(peopleHTML);
                 //call write to file to generate HTML with allHTML
-                writeToFile('index.html',allHTML);
+                writeToFile('./dist/index.html', allHTML);
             }
         });
 }
@@ -170,24 +172,31 @@ function initNewHTML() {
     let allPeople = '';
     myTeamArray.forEach(person => {
         let uniqueAttribute = '';
+        let title = ''
         if
             ('officeNumber' in person) {
+            title = 'Manager'
             uniqueAttribute = `Office Location:${person.officeNumber}`
         } else if
             ('school' in person) {
+            title = 'Intern'
             uniqueAttribute = `School: ${person.school}`
         } else if
-            ('gitHub' in person) {
-            uniqueAttribute = `Github username: ${person.github}`
+            ('github' in person) {
+            title = 'Engineer',
+                uniqueAttribute = `Github username: ${person.github}`
         }
 
         allPeople = allPeople + `
         <div class="col">
             <div class="card" style="width: 18rem">
-                <div class="card-header">${person.name}</div>
+                <div class="card-header">
+                <h2>${person.name}</h2>
+                <h3>${title}</h3>
+                </div>
                 <ul class="list-group list-group-flush">
                 <li class="list-group-item"> Employee ID: ${person.id}</li>
-                <li class="list-group-item"> email: ${person.email}</li>
+                <li class="list-group-item"> Email: ${person.email}</li>
                 <li class="list-group-item">${uniqueAttribute}</li>
                 </ul>
             </div>

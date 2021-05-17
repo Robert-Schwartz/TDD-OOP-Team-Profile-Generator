@@ -1,3 +1,6 @@
+//----------------Generate HTML page with cards
+function pageTemplate(peopleHTML) {
+    return `
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,6 +18,7 @@
   </head>
   <body>
     <header>
+      <!------------Header----------->
       <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="container-fluid">
@@ -23,12 +27,14 @@
         </nav>
       </div>
     </header>
-
     <!------------Employee Cards Container----------->
-    <!-- ${people} -->
- 
-        <div class="col">Column</div>
+    ${peopleHTML}
+
       </div>
     </div>
   </body>
 </html>
+`;
+}
+
+module.exports = pageTemplate;
