@@ -16,7 +16,7 @@ function pageTemplate(peopleHTML) {
     <title>My Team Profile</title>
   </head>
   <body>
-  <!------------Header----------->
+  <!----------------------Header---------------------->
     <header>
         <nav  class="header navbar navbar-expand-lg">
           <a class="header navbar-brand" href="#"> My Team </a>

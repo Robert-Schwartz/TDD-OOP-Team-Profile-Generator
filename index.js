@@ -1,19 +1,23 @@
-//---------------required packages
+//required package imports
+// =====================================================
 const { prompt } = require("inquirer");
 const fs = require("fs");
 const pageTemplate = require("./src/newPageTemplate");
 
-//---------------Employee Packages
+// Employee Packages
+// =====================================================
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 const { totalmem } = require("os");
 const { title } = require("process");
 
-//---------------- New Team Array Resulting from Prompts
+//  New Team Array Resulting from Prompts
+// ===========================================
 const myTeamArray = [];
 
-//--------------- Begin Inquirer prompts
+//Begin Inquirer prompts
+// ============================================
 // Manager Questions
 const managerPrompts = [
     {
@@ -97,7 +101,8 @@ const internPrompts = [
     },
 ];
 
-//--------------- Functions to run Prompts
+// Functions to run Prompts
+// ===============================================
 
 function askQuestions() {
     // ask manager questions
@@ -146,7 +151,8 @@ function addIntern() {
         });
 }
 
-//--------------Prompt for adding additional team members
+// Prompt for adding additional team members
+// ======================================================
 function addToTeam() {
     // ask to add team member or End team
     prompt(addTeamMember)
@@ -167,7 +173,8 @@ function addToTeam() {
         });
 }
 
-//--------------- Function to initialize HTML Cards
+//  Function to initialize HTML Cards
+// =====================================================
 function initNewHTML() {
     let allPeople = '';
     myTeamArray.forEach(person => {
@@ -210,7 +217,8 @@ function initNewHTML() {
 
 
 
-//--------------- Function to write HTML file
+// Function to write HTML file
+// =====================================================
 function writeToFile(fileName, allHTML) {
     fs.writeFile(fileName, allHTML, (err) => {
         if (err) {
@@ -221,8 +229,10 @@ function writeToFile(fileName, allHTML) {
 }
 
 
-//--------------- Call function to begin prompts
+// Call function to begin prompts
+// =====================================================
 askQuestions()
 
-//--------------- Export new myTeamArray
+// Export new myTeamArray
+// =====================================================
 module.exports = [myTeamArray];
