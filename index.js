@@ -176,10 +176,12 @@ function addToTeam() {
 //  Function to initialize HTML Cards
 // =====================================================
 function initNewHTML() {
+    // create string of cards for each employee
     let allPeople = '';
     myTeamArray.forEach(person => {
         let uniqueAttribute = '';
         let title = ''
+        // conditional check to add unique attribute based on employee role
         if
             ('officeNumber' in person) {
             title = 'Manager'
@@ -213,8 +215,6 @@ function initNewHTML() {
     console.log('allPeople =' + allPeople);
     return allPeople
 }
-
-
 
 
 // Function to write HTML file
